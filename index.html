@@ -1002,6 +1002,12 @@
         <div class="form-success" id="formSuccess">✅ Thanks! Your enquiry has been sent — we'll be in touch shortly.</div>
 
         <form id="enquiryForm" novalidate>
+          <!-- Web3Forms config: replace the access key with your own from https://web3forms.com (sent to tegumclarence@gmail.com) -->
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY_HERE" />
+          <input type="hidden" name="subject" value="New enquiry from Heybike Sports website" />
+          <input type="hidden" name="from_name" value="Heybike Sports — Website Enquiry" />
+          <!-- Honeypot spam trap (must stay empty; real users never see it) -->
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none;" aria-hidden="true" />
           <div class="form-row">
             <div class="field">
               <label for="name">Full Name <span class="req">*</span></label>
@@ -1238,6 +1244,9 @@
       el.addEventListener("change", function () { setError(id, false); });
     });
 
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var submitLabel = submitBtn ? submitBtn.textContent : "";
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       success.classList.remove("show");
@@ -1246,19 +1255,35 @@
         if (firstBad) firstBad.focus();
         return;
       }
-      // No backend on a static host — capture the enquiry client-side and confirm.
-      var data = {
-        name: document.getElementById("name").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        phone: document.getElementById("phone").value.trim(),
-        topic: document.getElementById("topic").value,
-        message: document.getElementById("message").value.trim()
-      };
-      try { console.log("New enquiry:", data); } catch (err) {}
-      form.reset();
-      success.classList.add("show");
-      showToast("Enquiry sent ✉️");
-      success.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "SENDING…";
+
+      var payload = JSON.stringify(Object.fromEntries(new FormData(form).entries()));
+
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: payload
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (json) {
+          if (json.success) {
+            form.reset();
+            success.classList.add("show");
+            showToast("Enquiry sent ✉️");
+            success.scrollIntoView({ behavior: "smooth", block: "center" });
+          } else {
+            showToast("Couldn't send — " + (json.message || "please try again"));
+          }
+        })
+        .catch(function () {
+          showToast("Network error — please call +1 404 514 9431");
+        })
+        .finally(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = submitLabel;
+        });
     });
   }
 
