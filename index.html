@@ -337,6 +337,36 @@
   .form-success.show { display: block; animation: fade .3s ease; }
   .form-note { color: var(--muted); font-size: .78rem; margin-top: 14px; text-align: center; }
 
+  /* ====== Order modal ====== */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,.72); backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center;
+    z-index: 1000; padding: 20px;
+  }
+  .modal-overlay.open { display: flex; animation: fade .25s ease; }
+  .modal {
+    background: var(--bg-2); border: 1px solid var(--line); border-radius: 18px;
+    max-width: 540px; width: 100%; max-height: 92vh; overflow-y: auto; padding: 30px; position: relative;
+  }
+  .modal__close {
+    position: absolute; top: 14px; right: 16px; background: none; border: none; color: var(--muted);
+    font-size: 1.8rem; line-height: 1; cursor: pointer; transition: color .2s;
+  }
+  .modal__close:hover { color: #fff; }
+  .modal h3 { font-size: 1.5rem; margin-bottom: 4px; }
+  .modal .modal-sub { color: var(--muted); font-size: .9rem; margin-bottom: 22px; }
+  .order-summary { display: flex; gap: 14px; align-items: center; background: var(--bg-3); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-bottom: 22px; }
+  .order-summary img { width: 72px; height: 72px; object-fit: cover; border-radius: 8px; flex-shrink: 0; background: var(--bg); }
+  .order-summary .os-name { font-weight: 800; font-size: 1rem; }
+  .order-summary .os-price { color: var(--accent); font-weight: 800; }
+  .qty-control { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .qty-control button { background: var(--bg-3); border: none; color: #fff; width: 40px; height: 44px; font-size: 1.2rem; cursor: pointer; font-family: inherit; }
+  .qty-control button:hover { background: var(--accent); }
+  .qty-control input { width: 54px; height: 44px; text-align: center; border: none; border-left: 1px solid var(--line); border-right: 1px solid var(--line); background: var(--bg-2); color: #fff; font-weight: 800; font-family: inherit; }
+  .order-total { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); margin-top: 6px; padding-top: 16px; margin-bottom: 18px; }
+  .order-total .lbl { color: var(--muted); }
+  .order-total .amt { font-size: 1.6rem; font-weight: 900; color: var(--accent); }
+
   /* ====== Footer ====== */
   footer { background: #0e0e0e; border-top: 1px solid var(--line); padding: 40px 0; text-align: center; color: var(--muted); font-size: .85rem; }
 
@@ -497,7 +527,7 @@
           <h3>Heybike Ranger City Commuter E-Bike</h3>
           <p class="desc">A lightweight city commuter e-bike built for daily rides. The 500W motor and removable 48V battery deliver around 40 miles of pedal-assisted range, while the step-through frame and LED headlight keep every commute easy and safe.</p>
           <div class="bike-price"><span class="now">$1,099</span><span class="was">$1,299</span></div>
-          <button class="btn btn-primary add-bike">ADD TO CART</button>
+          <button class="btn btn-primary add-bike">ORDER NOW</button>
         </div>
       </div>
 
@@ -512,7 +542,7 @@
           <h3>Heybike Mars Folding Fat Tire E-Bike</h3>
           <p class="desc">A folding fat-tire e-bike that packs into any car trunk, RV, or boat. Twenty-inch all-terrain tires and dual suspension handle trails, sand, and pavement, and the 750W motor delivers up to 45 miles per charge — ideal for camping and weekend trips.</p>
           <div class="bike-price"><span class="now">$1,399</span><span class="was">$1,699</span></div>
-          <button class="btn btn-primary add-bike">ADD TO CART</button>
+          <button class="btn btn-primary add-bike">ORDER NOW</button>
         </div>
       </div>
 
@@ -527,7 +557,7 @@
           <h3>Heybike Brawn All-Terrain E-Bike</h3>
           <p class="desc">A rugged off-road electric mountain bike with a 1000W brushless motor and hydraulic disc brakes. Full suspension and 4" fat tires keep you planted on trails, gravel, and steep climbs at up to 28 mph.</p>
           <div class="bike-price"><span class="now">$1,799</span><span class="was">$2,099</span></div>
-          <button class="btn btn-primary add-bike">ADD TO CART</button>
+          <button class="btn btn-primary add-bike">ORDER NOW</button>
         </div>
       </div>
 
@@ -541,7 +571,7 @@
           <h3>Heybike Tyson Full-Suspension E-Bike</h3>
           <p class="desc">A full-suspension e-bike with torque-sensing pedal assist and dual-battery support for up to 55 miles per charge. The magnesium-alloy frame, color display, and integrated lights make it equally at home on trails or the daily commute.</p>
           <div class="bike-price"><span class="now">$1,999</span><span class="was">$2,399</span></div>
-          <button class="btn btn-primary add-bike">ADD TO CART</button>
+          <button class="btn btn-primary add-bike">ORDER NOW</button>
         </div>
       </div>
 
@@ -556,7 +586,7 @@
           <h3>Heybike Hero Carbon Fiber E-Bike</h3>
           <p class="desc">An ultralight commuter e-bike with a smart mid-drive motor and a carbon belt drive. At just 39 lbs with a hidden battery and app connectivity, it's made for fast, low-maintenance city riding.</p>
           <div class="bike-price"><span class="now">$2,499</span><span class="was">$2,799</span></div>
-          <button class="btn btn-primary add-bike">ADD TO CART</button>
+          <button class="btn btn-primary add-bike">ORDER NOW</button>
         </div>
       </div>
 
@@ -571,7 +601,7 @@
           <h3>Heybike Villain Classic Combo</h3>
           <p class="desc">Our bestselling electric pit bike, powered by a 4160W peak mid-drive motor with 190 N·m of torque and a 45 mph top speed. Full suspension and regenerative braking make it off-road ready straight out of the box.</p>
           <div class="bike-price"><span class="now">$2,698</span><span class="was">$2,998</span></div>
-          <button class="btn btn-primary add-bike">ADD TO CART</button>
+          <button class="btn btn-primary add-bike">ORDER NOW</button>
         </div>
       </div>
 
@@ -585,7 +615,7 @@
           <h3>Heybike Galaxy Pro Touring E-Bike</h3>
           <p class="desc">A long-range touring e-bike with dual 52V batteries for up to 110 miles per charge. A 1200W motor, hydraulic brakes, and front-and-rear suspension make light work of multi-day adventures.</p>
           <div class="bike-price"><span class="now">$3,499</span><span class="was">$3,999</span></div>
-          <button class="btn btn-primary add-bike">ADD TO CART</button>
+          <button class="btn btn-primary add-bike">ORDER NOW</button>
         </div>
       </div>
 
@@ -600,7 +630,7 @@
           <h3>Heybike Apex Pro Electric Dirt Bike</h3>
           <p class="desc">Our flagship electric motocross bike, built around a 6000W peak motor with a 60 mph top speed and 70-mile range. Inverted forks, a nitrogen rear shock, and IPX7 waterproofing stand up to serious off-road racing.</p>
           <div class="bike-price"><span class="now">$4,999</span><span class="was">$5,499</span></div>
-          <button class="btn btn-primary add-bike">ADD TO CART</button>
+          <button class="btn btn-primary add-bike">ORDER NOW</button>
         </div>
       </div>
 
@@ -1099,6 +1129,97 @@
   </div>
 </footer>
 
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="orderModal" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
+  <div class="modal">
+    <button class="modal__close" id="orderClose" aria-label="Close">&times;</button>
+    <h3 id="orderTitle">Place Your Order</h3>
+    <p class="modal-sub">Fill in your details and we'll confirm your order by email.</p>
+
+    <div class="order-summary">
+      <img id="orderImg" src="" alt="" />
+      <div>
+        <div class="os-name" id="orderName">—</div>
+        <div class="os-price"><span id="orderUnitPrice">$0</span> <span style="color:var(--muted);font-weight:600;">each</span></div>
+      </div>
+    </div>
+
+    <div class="form-success" id="orderSuccess">✅ Order received! We'll email you a confirmation shortly. Thank you.</div>
+
+    <form id="orderForm" novalidate>
+      <!-- Web3Forms config: replace with your own access key from https://web3forms.com -->
+      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY_HERE" />
+      <input type="hidden" name="subject" value="🛒 New Bike Order — Heybike Sports" />
+      <input type="hidden" name="from_name" value="Heybike Sports — Online Order" />
+      <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none;" aria-hidden="true" />
+      <!-- order fields populated by JS -->
+      <input type="hidden" name="Product" id="of_product" />
+      <input type="hidden" name="Unit Price" id="of_unitprice" />
+      <input type="hidden" name="Order Total" id="of_total" />
+
+      <div class="field">
+        <label>Quantity</label>
+        <div class="qty-control">
+          <button type="button" id="qtyMinus" aria-label="Decrease">−</button>
+          <input type="number" name="Quantity" id="of_qty" value="1" min="1" max="20" readonly />
+          <button type="button" id="qtyPlus" aria-label="Increase">+</button>
+        </div>
+      </div>
+
+      <div class="order-total">
+        <span class="lbl">Order Total</span>
+        <span class="amt" id="orderTotalDisplay">$0</span>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="o_name">Full Name <span class="req">*</span></label>
+          <input type="text" id="o_name" name="Name" autocomplete="name" placeholder="Jane Rider" required />
+          <div class="err" data-for="o_name">Please enter your name.</div>
+        </div>
+        <div class="field">
+          <label for="o_email">Email <span class="req">*</span></label>
+          <input type="email" id="o_email" name="Email" autocomplete="email" placeholder="you@example.com" required />
+          <div class="err" data-for="o_email">Please enter a valid email.</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="o_phone">Phone <span class="req">*</span></label>
+        <input type="tel" id="o_phone" name="Phone" autocomplete="tel" placeholder="+1 ..." required />
+        <div class="err" data-for="o_phone">Please enter a phone number.</div>
+      </div>
+
+      <div class="field">
+        <label for="o_address">Shipping Address <span class="req">*</span></label>
+        <input type="text" id="o_address" name="Address" autocomplete="street-address" placeholder="Street address" required />
+        <div class="err" data-for="o_address">Please enter your shipping address.</div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="o_city">City <span class="req">*</span></label>
+          <input type="text" id="o_city" name="City" autocomplete="address-level2" placeholder="City" required />
+          <div class="err" data-for="o_city">Required.</div>
+        </div>
+        <div class="field">
+          <label for="o_zip">State / ZIP <span class="req">*</span></label>
+          <input type="text" id="o_zip" name="State and ZIP" autocomplete="postal-code" placeholder="State, ZIP" required />
+          <div class="err" data-for="o_zip">Required.</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="o_notes">Order Notes</label>
+        <textarea id="o_notes" name="Notes" placeholder="Colour preference, delivery instructions… (optional)" style="min-height:90px;"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-full" id="orderSubmit">PLACE ORDER</button>
+      <p class="form-note">Secure enquiry-based checkout. We'll email you to confirm payment &amp; delivery. Questions? Call <a href="tel:+14045149431" style="color:var(--accent);font-weight:700;">+1 404 514 9431</a>.</p>
+    </form>
+  </div>
+</div>
+
 <div class="toast" id="toast">Added to cart 🛒</div>
 
 <script>
@@ -1145,18 +1266,142 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 2200);
   }
-  function addToCart() {
-    cartCount++;
-    cartBadge.textContent = cartCount;
-    showToast("Added " + selectedModel + " 🛒");
-  }
-  document.getElementById("addToCart").addEventListener("click", addToCart);
-  document.getElementById("finalCta").addEventListener("click", addToCart);
+  document.getElementById("cartBtn").addEventListener("click", function () {
+    showToast(cartCount > 0 ? cartCount + " item(s) in cart" : "Your cart is empty");
+  });
   document.getElementById("buyKlarna").addEventListener("click", function () {
     showToast("Redirecting to Klarna checkout…");
   });
-  document.getElementById("cartBtn").addEventListener("click", function () {
-    showToast(cartCount > 0 ? cartCount + " item(s) in cart" : "Your cart is empty");
+
+  // ---- Order modal ----
+  var orderModal = document.getElementById("orderModal");
+  var orderForm = document.getElementById("orderForm");
+  var orderSuccess = document.getElementById("orderSuccess");
+  var orderSubmit = document.getElementById("orderSubmit");
+  var qtyInput = document.getElementById("of_qty");
+  var currentPrice = 0;
+
+  function money(n) { return "$" + n.toLocaleString("en-US"); }
+
+  function refreshTotal() {
+    var qty = Math.max(1, Math.min(20, parseInt(qtyInput.value, 10) || 1));
+    qtyInput.value = qty;
+    var total = currentPrice * qty;
+    document.getElementById("orderTotalDisplay").textContent = money(total);
+    document.getElementById("of_total").value = money(total);
+  }
+
+  function openOrder(name, price, imgSrc) {
+    currentPrice = price;
+    qtyInput.value = 1;
+    document.getElementById("orderName").textContent = name;
+    document.getElementById("orderUnitPrice").textContent = money(price);
+    document.getElementById("orderImg").src = imgSrc || "";
+    document.getElementById("orderImg").alt = name;
+    document.getElementById("of_product").value = name;
+    document.getElementById("of_unitprice").value = money(price);
+    refreshTotal();
+    orderSuccess.classList.remove("show");
+    orderModal.classList.add("open");
+    document.body.style.overflow = "hidden";
+    setTimeout(function () { document.getElementById("o_name").focus(); }, 50);
+  }
+
+  function closeOrder() {
+    orderModal.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  document.getElementById("orderClose").addEventListener("click", closeOrder);
+  orderModal.addEventListener("click", function (e) { if (e.target === orderModal) closeOrder(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && orderModal.classList.contains("open")) closeOrder(); });
+
+  document.getElementById("qtyMinus").addEventListener("click", function () { qtyInput.value = (parseInt(qtyInput.value, 10) || 1) - 1; refreshTotal(); });
+  document.getElementById("qtyPlus").addEventListener("click", function () { qtyInput.value = (parseInt(qtyInput.value, 10) || 1) + 1; refreshTotal(); });
+
+  // hero + final CTA → Villain Combo
+  var heroImg = document.querySelector(".gallery img");
+  var heroImgSrc = heroImg ? heroImg.src : "";
+  document.getElementById("addToCart").addEventListener("click", function () {
+    openOrder("Heybike Villain Combo — " + selectedModel, 2698, heroImgSrc);
+  });
+  document.getElementById("finalCta").addEventListener("click", function () {
+    openOrder("Heybike Villain Combo — " + selectedModel, 2698, heroImgSrc);
+  });
+
+  // shop bikes → their own product + price
+  document.getElementById("shopGrid").addEventListener("click", function (e) {
+    var btn = e.target.closest(".add-bike");
+    if (!btn) return;
+    var card = btn.closest(".bike-card");
+    var cardImg = card.querySelector("img");
+    openOrder(card.dataset.name, parseInt(card.dataset.price, 10), cardImg ? cardImg.src : "");
+  });
+
+  // order form validation + submit
+  var orderEmailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function setErr(id, on) {
+    var input = document.getElementById(id);
+    var err = orderForm.querySelector('.err[data-for="' + id + '"]');
+    if (input) input.classList.toggle("invalid", on);
+    if (err) err.classList.toggle("show", on);
+  }
+  ["o_name", "o_email", "o_phone", "o_address", "o_city", "o_zip"].forEach(function (id) {
+    document.getElementById(id).addEventListener("input", function () { setErr(id, false); });
+  });
+  function validateOrder() {
+    var ok = true;
+    var checks = [
+      ["o_name", function (v) { return v.length > 0; }],
+      ["o_email", function (v) { return orderEmailRe.test(v); }],
+      ["o_phone", function (v) { return v.length >= 6; }],
+      ["o_address", function (v) { return v.length > 0; }],
+      ["o_city", function (v) { return v.length > 0; }],
+      ["o_zip", function (v) { return v.length > 0; }]
+    ];
+    checks.forEach(function (c) {
+      var bad = !c[1](document.getElementById(c[0]).value.trim());
+      setErr(c[0], bad);
+      if (bad) ok = false;
+    });
+    return ok;
+  }
+
+  orderForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    orderSuccess.classList.remove("show");
+    if (!validateOrder()) {
+      var firstBad = orderForm.querySelector(".invalid");
+      if (firstBad) firstBad.focus();
+      return;
+    }
+    orderSubmit.disabled = true;
+    orderSubmit.textContent = "PLACING ORDER…";
+    var payload = JSON.stringify(Object.fromEntries(new FormData(orderForm).entries()));
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: payload
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (json) {
+        if (json.success) {
+          orderForm.reset();
+          qtyInput.value = 1;
+          cartCount++;
+          cartBadge.textContent = cartCount;
+          orderSuccess.classList.add("show");
+          showToast("Order placed ✅");
+          orderSuccess.scrollIntoView({ behavior: "smooth", block: "center" });
+        } else {
+          showToast("Couldn't place order — " + (json.message || "try again"));
+        }
+      })
+      .catch(function () { showToast("Network error — please call +1 404 514 9431"); })
+      .finally(function () {
+        orderSubmit.disabled = false;
+        orderSubmit.textContent = "PLACE ORDER";
+      });
   });
 
   // ---- Shop collection filter ----
@@ -1170,16 +1415,6 @@
       var show = filter === "all" || card.dataset.cat === filter;
       card.style.display = show ? "flex" : "none";
     });
-  });
-
-  // ---- Shop collection add-to-cart ----
-  document.getElementById("shopGrid").addEventListener("click", function (e) {
-    var btn = e.target.closest(".add-bike");
-    if (!btn) return;
-    var card = btn.closest(".bike-card");
-    cartCount++;
-    cartBadge.textContent = cartCount;
-    showToast("Added " + card.dataset.name + " 🛒");
   });
 
   // ---- Specs tabs ----
