@@ -296,6 +296,47 @@
   .final-cta p { color: var(--muted); font-size: 1.15rem; max-width: 640px; margin: 0 auto 32px; }
   .final-cta .stock-line { margin-top: 18px; color: #4ade80; font-weight: 700; }
 
+  /* ====== About ====== */
+  .about-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 50px; align-items: center; }
+  .about-grid img { border-radius: 16px; width: 100%; object-fit: cover; }
+  .about-copy p { color: var(--muted); margin-bottom: 16px; font-size: 1.05rem; }
+  .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+  .about-stat { background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 18px; text-align: center; }
+  .about-stat .n { font-size: 1.8rem; font-weight: 900; color: var(--accent); }
+  .about-stat .t { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+
+  /* ====== Contact ====== */
+  .contact { background: var(--bg-2); border-top: 1px solid var(--line); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: start; }
+  .contact-info .ci-item { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 26px; }
+  .contact-info .ci-item .ic { font-size: 1.6rem; background: var(--bg-3); border: 1px solid var(--line); width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-info .ci-item h4 { font-size: 1rem; margin-bottom: 2px; }
+  .contact-info .ci-item p, .contact-info .ci-item a { color: var(--muted); font-size: .95rem; }
+  .contact-info .ci-item a:hover { color: var(--accent); }
+  .contact-info .phone-cta { font-size: 1.35rem; font-weight: 900; color: #fff; }
+  .contact-info .phone-cta:hover { color: var(--accent); }
+
+  .contact-form { background: var(--bg); border: 1px solid var(--line); border-radius: 16px; padding: 32px; }
+  .contact-form h3 { font-size: 1.4rem; margin-bottom: 6px; }
+  .contact-form .sub { color: var(--muted); font-size: .92rem; margin-bottom: 22px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: .82rem; font-weight: 700; margin-bottom: 7px; color: #e5e5e5; }
+  .field label .req { color: var(--accent); }
+  .field input, .field select, .field textarea {
+    width: 100%; background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px;
+    color: #fff; padding: 13px 14px; font-family: inherit; font-size: .95rem; transition: border-color .2s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+  .field textarea { resize: vertical; min-height: 130px; }
+  .field input.invalid, .field textarea.invalid, .field select.invalid { border-color: #ef4444; }
+  @media (max-width: 680px) { .form-row { grid-template-columns: 1fr; } .about-stats { grid-template-columns: 1fr; } }
+  .field .err { color: #ef4444; font-size: .78rem; margin-top: 6px; display: none; }
+  .field .err.show { display: block; }
+  .form-success { display: none; background: rgba(74,222,128,.12); border: 1px solid #4ade80; color: #4ade80; border-radius: 10px; padding: 16px; font-weight: 700; margin-bottom: 18px; }
+  .form-success.show { display: block; animation: fade .3s ease; }
+  .form-note { color: var(--muted); font-size: .78rem; margin-top: 14px; text-align: center; }
+
   /* ====== Footer ====== */
   footer { background: #0e0e0e; border-top: 1px solid var(--line); padding: 40px 0; text-align: center; color: var(--muted); font-size: .85rem; }
 
@@ -315,6 +356,8 @@
     .yt-strip { grid-template-columns: repeat(2, 1fr); }
     .safety-cards { grid-template-columns: 1fr; }
     .reviews-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 680px) {
     .navlinks, .cart { display: none; }
@@ -354,9 +397,11 @@
     <a href="#top" class="logo">HEYBIKE <span class="accent">SPORTS</span></a>
     <ul class="navlinks" id="navlinks">
       <li><a href="#shop">Shop</a></li>
+      <li><a href="#about">About</a></li>
       <li><a href="#reviews">Reviews</a></li>
       <li><a href="#specs">Specs</a></li>
       <li><a href="#faqs">FAQs</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
     <div style="display:flex;align-items:center;gap:16px;">
       <button class="cart" id="cartBtn" aria-label="Cart">🛒<span class="cart__badge" id="cartBadge">0</span></button>
@@ -559,6 +604,29 @@
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- 3c. ABOUT US -->
+<section class="pad" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Who We Are</span>
+      <h2>About Heybike Sports</h2>
+    </div>
+    <div class="about-grid">
+      <img src="https://sports.heybike.com/cdn/shop/files/villain-speed-image.jpg" alt="Heybike Villain electric dirt bike riding off-road" loading="lazy" />
+      <div class="about-copy">
+        <p>Heybike Sports was built by riders, for riders. We set out to make high-performance electric dirt bikes and pit bikes that deliver real motorcycle thrills — without the fuel, the noise, or the maintenance headaches.</p>
+        <p>Every model is engineered around powerful mid-drive motors, long-range batteries, and full suspension, then tested hard on dirt, trails, and pavement before it ever reaches your garage. From the flagship Villain Combo to our everyday commuter e-bikes, the goal is the same: more range, more torque, and more fun on every ride.</p>
+        <p>We back it all with responsive U.S.-based support, fast free shipping, and a 1-year warranty — because the ride should be the only thing you have to think about.</p>
+        <div class="about-stats">
+          <div class="about-stat"><div class="n">50k+</div><div class="t">Riders</div></div>
+          <div class="about-stat"><div class="n">4.9★</div><div class="t">Avg Rating</div></div>
+          <div class="about-stat"><div class="n">24h</div><div class="t">Ships In</div></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -884,6 +952,103 @@
   </div>
 </section>
 
+<!-- 13b. CONTACT / ENQUIRIES -->
+<section class="contact pad" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Get In Touch</span>
+      <h2>Contact Us</h2>
+      <p>Questions about a bike, your order, or shipping? Reach out — our U.S.-based team is here to help, 24/7.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="ci-item">
+          <div class="ic">📞</div>
+          <div>
+            <h4>Call or Text</h4>
+            <a class="phone-cta" href="tel:+14045149431">+1 404 514 9431</a>
+            <p>Available 24/7 for sales &amp; support.</p>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ic">✉️</div>
+          <div>
+            <h4>Email</h4>
+            <a href="mailto:support@heybikesports.com">support@heybikesports.com</a>
+            <p>We reply within 24 hours.</p>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ic">🕑</div>
+          <div>
+            <h4>Support Hours</h4>
+            <p>Monday – Sunday · Round the clock</p>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ic">🚚</div>
+          <div>
+            <h4>Shipping</h4>
+            <p>Free fast U.S. shipping · Delivered in 2–3 business days.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h3>Send an Enquiry</h3>
+        <p class="sub">Fill out the form and we'll get back to you as soon as possible.</p>
+
+        <div class="form-success" id="formSuccess">✅ Thanks! Your enquiry has been sent — we'll be in touch shortly.</div>
+
+        <form id="enquiryForm" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Full Name <span class="req">*</span></label>
+              <input type="text" id="name" name="name" autocomplete="name" placeholder="Jane Rider" required />
+              <div class="err" data-for="name">Please enter your name.</div>
+            </div>
+            <div class="field">
+              <label for="email">Email <span class="req">*</span></label>
+              <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" required />
+              <div class="err" data-for="email">Please enter a valid email address.</div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(optional)" />
+              <div class="err" data-for="phone"></div>
+            </div>
+            <div class="field">
+              <label for="topic">Enquiry Type <span class="req">*</span></label>
+              <select id="topic" name="topic" required>
+                <option value="">Select a topic…</option>
+                <option>Sales &amp; Product Question</option>
+                <option>Order &amp; Shipping Status</option>
+                <option>Warranty &amp; Support</option>
+                <option>Wholesale / Dealer</option>
+                <option>Other</option>
+              </select>
+              <div class="err" data-for="topic">Please choose an enquiry type.</div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="message">Message <span class="req">*</span></label>
+            <textarea id="message" name="message" placeholder="How can we help?" required></textarea>
+            <div class="err" data-for="message">Please enter a message (at least 10 characters).</div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full">SEND ENQUIRY</button>
+          <p class="form-note">Or call us directly at <a href="tel:+14045149431" style="color:var(--accent);font-weight:700;">+1 404 514 9431</a>. We never share your details.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 14. FINAL CTA -->
 <section class="final-cta pad">
   <div class="wrap">
@@ -1038,6 +1203,64 @@
       answer.style.maxHeight = answer.scrollHeight + "px";
     }
   });
+
+  // ---- Enquiry form ----
+  var form = document.getElementById("enquiryForm");
+  if (form) {
+    var success = document.getElementById("formSuccess");
+    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function setError(id, on) {
+      var input = document.getElementById(id);
+      var err = form.querySelector('.err[data-for="' + id + '"]');
+      if (input) input.classList.toggle("invalid", on);
+      if (err) err.classList.toggle("show", on);
+    }
+
+    function validate() {
+      var ok = true;
+      var name = document.getElementById("name").value.trim();
+      var email = document.getElementById("email").value.trim();
+      var topic = document.getElementById("topic").value;
+      var message = document.getElementById("message").value.trim();
+
+      setError("name", !name); if (!name) ok = false;
+      var emailBad = !emailRe.test(email); setError("email", emailBad); if (emailBad) ok = false;
+      setError("topic", !topic); if (!topic) ok = false;
+      var msgBad = message.length < 10; setError("message", msgBad); if (msgBad) ok = false;
+      return ok;
+    }
+
+    // live-clear errors as the user fixes fields
+    ["name", "email", "topic", "message"].forEach(function (id) {
+      var el = document.getElementById(id);
+      el.addEventListener("input", function () { setError(id, false); });
+      el.addEventListener("change", function () { setError(id, false); });
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      success.classList.remove("show");
+      if (!validate()) {
+        var firstBad = form.querySelector(".invalid");
+        if (firstBad) firstBad.focus();
+        return;
+      }
+      // No backend on a static host — capture the enquiry client-side and confirm.
+      var data = {
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        topic: document.getElementById("topic").value,
+        message: document.getElementById("message").value.trim()
+      };
+      try { console.log("New enquiry:", data); } catch (err) {}
+      form.reset();
+      success.classList.add("show");
+      showToast("Enquiry sent ✉️");
+      success.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  }
 
   // ---- YouTube cards ----
   document.getElementById("ytStrip").addEventListener("click", function (e) {
